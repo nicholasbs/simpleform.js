@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="jquery.js"></script>
+    <!-- <script src="jquery.js"></script> -->
     <!-- <script src="../tinyvalidation/tinyvalidation.js"></script> -->
     <script src="./simpleform.js"></script>
     <script>
@@ -23,6 +23,7 @@
           f.string("name", {required: true, html: {"data-validate": "notEmpty"}});
           f.checkbox("enrolled");
           f.select("batch_number", ["Batch 0", "Batch 1", "Batch 2"]);
+          f.radio("radio_station", ["98.9FM", "104.3FM", "97.1FM"]);
           f.password("password", {html: {"data-validate": "notEmpty"}});
           f.submit();
 

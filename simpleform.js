@@ -19,7 +19,7 @@ function Builder (model, options) {
   }
 
   if (options.html) setAttributesOnEl(this.form, options.html);
-};
+}
 
 Builder.prototype.input = function (name, type, options) {
   var label,
@@ -46,7 +46,7 @@ Builder.prototype.input = function (name, type, options) {
 
   this.elements[name] = input;
   this.form.appendChild(input);
-}
+};
 
 Builder.prototype.string = function (name, options) {
   options = extend({showLabel: true}, options);
@@ -95,7 +95,33 @@ Builder.prototype.select = function (name, items, options) {
 
   this.elements[name] = select;
   this.form.appendChild(select);
-}
+};
+
+Builder.prototype.radio = function (name, items, options) {
+  var label,
+      input,
+      i,
+      baseId = this.modelClass.toLowerCase() + "_" + name.toLowerCase().replace(/\s+/g,"_");
+  options = extend({showLabel: true}, options);
+
+  for (i=0; i<items.length; i++) {
+    input = document.createElement("input");
+    input.value = i;
+    input.type = "radio";
+    input.name = baseId;
+    input.id = baseId + '_' + i;
+    
+    if (options.html) setAttributesOnEl(input, options.html);
+
+    label = document.createElement("label");
+    label.textContent = items[i];
+    label.htmlFor = input.id;
+
+    this.elements[input.id] = input;
+    this.form.appendChild(input);
+    this.form.appendChild(label);
+  }
+};
 
 Builder.prototype.submit = function (name, options) {
   options = extend({showLabel: false}, options);
