@@ -146,7 +146,7 @@ function extend (base, add) {
   return obj;
 }
 
-function setAttributesOnEl(el, options) {
+function setAttributesOnEl (el, options) {
   for (var attr in options) {
     if (options.hasOwnProperty(attr))
       el.setAttribute(attr, options[attr])
