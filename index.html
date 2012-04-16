@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="jquery.js"></script>
+    <!-- <script src="../tinyvalidation/tinyvalidation.js"></script> -->
+    <script src="./simpleform.js"></script>
+    <script>
+      function Student (name, password, enrolled) {
+        this.name = name;
+        this.password = password;
+        this.enrolled = enrolled;
+        this.id = Student.nextId++;
+      }
+      Student.nextId = 1;
+      
+      var student = new Student("Alan Turing", "admin", true);
+
+      function setup () {
+        var options = {
+          html: {"data-validate-on-load": true}
+        };
+        simpleFormFor(student, options, function (f) {
+          f.string("name", {required: true, html: {"data-validate": "notEmpty"}});
+          f.checkbox("enrolled");
+          f.select("batch_number", ["Batch 0", "Batch 1", "Batch 2"]);
+          f.password("password", {html: {"data-validate": "notEmpty"}});
+          f.submit();
+
+          f.done();
+        });
+
+        //$("#student-container form").tinyValidation({validateOnKeyUp: true});
+      }
+    </script>
+
+    
+    <style>
+      input[type=text], input[type=password] {
+        border: 1px solid black;
+      }
+      .error {
+        border: 1px solid red;
+      }
+    </style>
+  </head>
+  <body onload="setup()">
+    <div id="student-container">
+    </div>
+  </body>
+</html>
